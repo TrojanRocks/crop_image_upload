@@ -21,3 +21,9 @@ input[type="file"] {
 #selectButton{
     margin-top:20vh;
 }
+.hidden{
+    display: none;
+}
+.image-box{
+    background-color: white;
+}

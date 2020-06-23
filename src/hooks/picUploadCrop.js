@@ -1,8 +1,9 @@
-import ReactDOM from 'react-dom'
-import React, {useState, useCallback, useRef, useEffect} from 'react'
-import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import './picUploadCrop.css'
+
+import React, {useCallback, useEffect, useRef, useState} from 'react'
+
+import ReactCrop from 'react-image-crop'
 
 const pixelRatio = 4;
 
@@ -67,7 +68,7 @@ export default function PicUploadCrop() {
       "image/jpeg",
       1
     )
-
+   console.log(previewCanvas);
     var headers = new Headers();
     headers.append("Authorization", "Client-ID 7e0bbcd94277dbe");
     var formData = new FormData();
@@ -127,11 +128,11 @@ export default function PicUploadCrop() {
   return (
     <React.Fragment>
       {!photo?
-        <label class="Button" id="selectButton">
+        <label className="Button" id="selectButton">
           <input type='file' onChange={handleFile} />
             Select Image
             </label>:
-          <div>
+          <div className="image-box">
             <ReactCrop
               src={photo}
               ruleOfThirds
@@ -139,6 +140,9 @@ export default function PicUploadCrop() {
               crop={crop}
               onChange={c=>setCrop(c)}
               onComplete={c=>setCompletedCrop(c)}
+              imageStyle={{ margin: "24px",
+              width:"280px",
+              height:"320px"}}
             />
             <div id="uploadButton">
               <button className="Button" onClick={()=>handleSubmit(previewCanvasRef.current, completedCrop)}>upload</button>
@@ -148,7 +152,7 @@ export default function PicUploadCrop() {
 
         {/* ---------Cropped Image Preview-----------*/}
 
-      {/*<div>
+      <div className="hidden">
         <canvas
           ref={previewCanvasRef}
           style={{
@@ -156,7 +160,7 @@ export default function PicUploadCrop() {
             height: completedCrop?.height ?? 0
           }}
         />
-      </div>*/}
+      </div>
 
       {/* ---------Cropped Image Preview ends-----------*/}
     </React.Fragment>
